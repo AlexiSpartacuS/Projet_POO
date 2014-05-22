@@ -9,23 +9,49 @@ int main()
 {
 //char a;
 
-void (*pointeurSurFonction)(void);
-pointeurSurFonction = test;
-
-map<char, void*> lol;
+map<char, void (*) (void) > lol;
 
 
-lol['a'] = &pointeurSurFonction;
+lol['a'] = test;
+lol['+'] = test1;
 
 char j;
+cin >> j;
+/*
+if (j == lol.find(j))
+{
+	(*pointeurSurFonction)();
+}
+*/
 
-(*pointeurSurFonction)();
+for(map<char, void (*) (void)>::iterator it=lol.begin() ; it!=lol.end(); ++it)
+{
+
+	if(j == it->first)
+	{
+		
+		(*it->second) ();
+		
+	} 
+}
+
+
+//(*pointeurSurFonction)();
 
 return 0;
 }
 
 
-//fct.cpp
+
+/*
+{
+    it->first; // accede à la clé
+    it->second; // accede à la valeur
+}
+*/
+
+
+//fonction.cpp
 
 #include <iostream>
 
@@ -33,5 +59,11 @@ using namespace std;
  
 void test ()
 {
-cout << "WALLAH ça marche bien";
+cout << "WALLAH ça marche bien"<<endl;
 }
+
+void test1 ()
+{
+cout << "BLBLBLBLBLBLBLBLBLB"<<endl;
+}
+
