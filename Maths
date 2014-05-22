@@ -1,0 +1,4 @@
+2) Exposer l’algorithme de DIJKSTRA et traiter un exemple de votre choix.
+L'algorithme de Dijkstra permet de trouver le plus court chemin pour relier le sommet de numéro dep au sommet de numéro arv.
+Un sommet de départ dep étant fixé, cet algorithme construit progressivement un ensemble de sommets pour lesquels on connaît un plus court chemin depuis dep.
+A chaque étape, on choisit un sommet dont la distance à  dep est minimale parmi ceux qui n’ont pas encore été choisis.On utilisera un ensemble c des sommets à choisir successivement et deux tableaux d et pred  des distances et des prédécesseurs. 
