@@ -1,7 +1,7 @@
 #include <iostream>
 #include <map>
 
-#include "fonction.cpp"
+#include "fonction.hpp"
 
 using namespace std;
  
