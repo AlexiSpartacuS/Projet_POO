@@ -1,53 +1,108 @@
+#ifndef PILE_HPP
+#define PILE_HPP
 #include <iostream>
 #include <map>
-
-#include "fonction.hpp"
-
+#include <functional>
 using namespace std;
- 
-int main()
+
+template <typename Type> class Pile
 {
-//char a;
+	private:
+		unsigned int taillePile;
+		Type *pile;
+		unsigned int sommet;
+	public:
+		Pile(unsigned taille=100);
+		Pile(const Pile&);
+		inline ~Pile() {delete [] pile;};
+		void empiler();
+		void empiler(double);
+		Type depiler();
+		inline unsigned int compter()const {return sommet;};
+		void afficher() const;
+		void realloc();
+		
+		void addition(Pile &);       //marche
+};
 
-map<char, void (*) (void) > lol;
-
-
-lol['a'] = test;
-lol['+'] = test1;
-
-char j;
-cin >> j;
-/*
-if (j == lol.find(j))
-{
-	(*pointeurSurFonction)();
-}
-*/
-
-for(map<char, void (*) (void)>::iterator it=lol.begin() ; it!=lol.end(); ++it)
-{
-
-	if(j == it->first)
+template <typename Type>
+Pile <Type>::Pile(unsigned taille)
+	:taillePile(taille), pile(NULL),sommet(0)
 	{
-		
-		(*it->second) ();
-		
-	} 
-}
+		pile = new Type[taillePile];
+	}
+	
+template <typename Type>
+Pile <Type>::Pile(const Pile & pile1)
+	:taillePile(pile1.taillePile), pile(NULL),sommet(pile1.sommet)
+	{
+		pile = new Type[taillePile];
+	}
 
-
-//(*pointeurSurFonction)();
-
-return 0;
-}
-
-
-
-/*
+template <typename Type>
+void Pile <Type>::empiler(void)
 {
-    it->first; // accede à la clé
-    it->second; // accede à la valeur
+	char c;
+	cin >> c;
+
+	if(sommet < taillePile)
+	{
+		pile[sommet++]=c;
+		cout << "Nombre bien empilé"<<endl;
+	}
+	else
+	{
+		cerr << "Pile pleine !";
+	}
 }
-*/
+
+template <typename Type>
+void Pile <Type>::empiler(double c)
+{
+	if(sommet < taillePile)
+	{
+		pile[sommet++]=c;
+		cout << "Nombre bien empilé"<<endl;
+	}
+	else
+	{
+		cerr << "Pile pleine !";
+	}
+}
 
 
+template <typename Type>
+Type Pile <Type>::depiler(void)
+{
+	if(sommet>0)
+		return pile[--sommet];
+	else
+	{
+		cerr << "Pile vide !";
+	}
+}
+
+
+template <typename Type>
+void Pile <Type>::afficher(void) const
+{
+	cout << endl <<"[ ";
+	
+	for(unsigned int i=0 ; i<sommet ; i++)
+	{
+		 cout << pile[i] ;
+	}
+	cout << " ]" << endl;
+}
+
+template <typename Type>
+void Pile<Type>::addition(Pile & pile1)
+{	
+	double resultat;
+	double nb_1 = pile1.depiler();
+	double nb_2 = pile1.depiler();
+    resultat = nb_1+nb_2;
+    pile1.empiler(resultat);
+
+}
+#endif
